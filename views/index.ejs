@@ -1,0 +1,54 @@
+<html ng-app='app.todos'>
+<head>
+	<meta charset="UTF-8">
+	<title>hello node js app</title>
+	<link rel="stylesheet" href="assets/css/bootstrap.css">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.1/css/xeditable.min.css">
+	<link rel="stylesheet" href="assets/css/style.css">
+	<script src="assets/js/bootstrap.js"></script>
+<!-- load angular -->
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.1/js/xeditable.min.js"></script>
+<script src="assets/js/main/app.js"></script>
+<script src="assets/js/main/service/svTodos.js"></script>
+</head>
+<body ng-controller="todoController">
+	<div class="container">
+		
+		<div class="jumbotron text-center">
+			<h3>{{appName}}
+				<span class="label label-info">{{todos.length}}</span>
+			</h3>
+		</div>
+		<div class="row" id="todo-list">
+			<div class="col-sm-6 col-sm-offset-3">
+				<div class="checkbox" ng-repeat="todo in todos">
+
+					<input type="checkbox" ng-model="todo.isDone" ng-change="updateTodo(todo)">
+					<a href ng-click="deleteTodo(todo)"><i class="fa fa-remove" ng-click="confirm_delete()"></i></a>
+					<a href ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible"><i class="fa fa-edit"></i></a>
+					<span id="TextSimpleCtrl" ng-class="{strike: todo.isDone}" editable-text="todo.text" e-form="textBtnForm" onaftersave="updateTodo(todo)">{{todo.text}}</span>
+				</div>
+				<p class="text-center" ng-show="loading">
+				 <span class="fa fa-spinner fa-spin fa-3x"></span>
+				</p>
+			</div>
+		</div>
+		<div class="row" id="todo-form">
+			<div class="col-sm-8 col-sm-offset-2 text-center">
+				<form ng-submit="submit()" role="form">
+					
+				
+					<div class="form-group">
+						
+						<input type="text" ng-model="formdata.text" class="form-control input-lg text-center" id=""placeholder="what do you want to do?" >
+					</div>
+					<input type="submit" class="btn btn-primary" ng-disabled="!formdata.text" value="Add" >
+				</form>
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>
