@@ -2,6 +2,8 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var morgan = require("morgan");
 var mongoose = require("mongoose");
+var favicon = require('serve-favicon');
+var path = require('path');
 var config = require("./config");
 var setUpController = require("./api/controllers/setupController");
 var todoController = require("./api/controllers/todoController");
@@ -15,6 +17,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(morgan("dev"));
 
 app.set("view engine","ejs");
+app.use(favicon(path.join(__dirname,'public','images','favicon.png')));
 //db info
 console.log(config.getDbConnectionString());
 // connect to mongodb

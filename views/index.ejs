@@ -26,7 +26,7 @@
 				<div class="checkbox" ng-repeat="todo in todos">
 
 					<input type="checkbox" ng-model="todo.isDone" ng-change="updateTodo(todo)">
-					<a href ng-click="deleteTodo(todo)"><i class="fa fa-remove" ng-click="confirm_delete()"></i></a>
+					<a href ng-click="confirm_delete(todo)"><i class="fa fa-remove" ></i></a>
 					<a href ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible"><i class="fa fa-edit"></i></a>
 					<span id="TextSimpleCtrl" ng-class="{strike: todo.isDone}" editable-text="todo.text" e-form="textBtnForm" onaftersave="updateTodo(todo)">{{todo.text}}</span>
 				</div>
@@ -38,8 +38,6 @@
 		<div class="row" id="todo-form">
 			<div class="col-sm-8 col-sm-offset-2 text-center">
 				<form ng-submit="submit()" role="form">
-					
-				
 					<div class="form-group">
 						
 						<input type="text" ng-model="formdata.text" class="form-control input-lg text-center" id=""placeholder="what do you want to do?" >

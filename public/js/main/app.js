@@ -10,9 +10,19 @@ app.controller("todoController",['$scope','svTodos',function($scope,svTodos){
 		$scope.loading=false;
 	});
 	// confirm
-	$scope.confirm_delete = function(){
-		console.log('somns');
-		 return confirm('are you sure?');
+	$scope.confirm_delete = function(todo){
+		// console.log('somns');
+		if (confirm('Are you sure?'))
+		{
+			$scope.loading=true;
+			svTodos.delete(todo._id).success(function(data){
+			$scope.todos=data;
+			$scope.loading=false;
+		});
+		}
+		else {
+			$scope.loading=false;
+		}
 	}
 	$scope.submit = function(){
 		var todo ={
@@ -33,11 +43,5 @@ app.controller("todoController",['$scope','svTodos',function($scope,svTodos){
 		});
 
 	}
-	$scope.deleteTodo = function(todo){
-		$scope.loading=true;
-		svTodos.delete(todo._id).success(function(data){
-			$scope.todos=data;
-			$scope.loading=false;
-		});
-	}
+
 }]);
