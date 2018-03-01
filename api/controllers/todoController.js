@@ -34,7 +34,8 @@ module.exports = function(app){
 		var todo =
 		{
 			text:req.body.text,
-			isDone:req.body.isDone
+			isDone:req.body.isDone,
+			score:req.body.score
 		};
 		Todos.create(todo,function(err,todo){
 			if (err) throw err;
@@ -53,7 +54,8 @@ module.exports = function(app){
 				_id:req.body._id},
 				{ 
 					text:req.body.text,
-					isDone:req.body.isDone
+					isDone:req.body.isDone,
+					score:req.body.score
 			},function(err,todo){
 				if (err) {
 					return res.status(500).json(err);

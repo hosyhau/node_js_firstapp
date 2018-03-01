@@ -29,6 +29,9 @@
 					<a href ng-click="confirm_delete(todo)"><i class="fa fa-remove" ></i></a>
 					<a href ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible"><i class="fa fa-edit"></i></a>
 					<span id="TextSimpleCtrl" ng-class="{strike: todo.isDone}" editable-text="todo.text" e-form="textBtnForm" onaftersave="updateTodo(todo)">{{todo.text}}</span>
+					<span class="TextSimpleCtrl"><a href="#" editable-select="todo.score" e-ng-options="s.score for s in scores" onaftersave="updateTodo(todo)">
+    					-{{todo.score}}
+  					</a></span>
 				</div>
 				<p class="text-center" ng-show="loading">
 				 <span class="fa fa-spinner fa-spin fa-3x"></span>
@@ -37,12 +40,22 @@
 		</div>
 		<div class="row" id="todo-form">
 			<div class="col-sm-8 col-sm-offset-2 text-center">
-				<form ng-submit="submit()" role="form">
+				<form ng-submit="create()" role="form">
 					<div class="form-group">
-						
-						<input type="text" ng-model="formdata.text" class="form-control input-lg text-center" id=""placeholder="what do you want to do?" >
+						<input type="text" ng-model="formdata.text" class="form-control input-lg text-center" id=""placeholder="what is your subject?" >
+						<select class="form-control" name="option" id="score" ng-model="formdata.score">
+						  <option value="" disabled selected>Choose your score</option>
+						  <option value="A">A</option>
+						  <option value="B+">B+</option>
+						  <option value="B">B</option>
+						   <option value="C+">C+</option>
+						  <option value="C">C</option>
+						  <option value="D+">D+</option>
+						  <option value="D">D</option>
+						</select>
 					</div>
-					<input type="submit" class="btn btn-primary" ng-disabled="!formdata.text" value="Add" >
+					<div class="clear"></div>
+					<input type="submit" class="btn btn-primary fix" ng-disabled="!formdata.text||!formdata.score" value="Add" >
 				</form>
 			</div>
 		</div>

@@ -4,6 +4,16 @@ app.controller("todoController",['$scope','svTodos',function($scope,svTodos){
 	$scope.formdata={};
 	$scope.todos = [];
 	$scope.loading=true;
+	$scope.scores = [
+    { score: 'A'},
+    { score: 'B+'},
+    {score: 'B'},
+    { score: 'C+'},
+    { score: 'C'},
+    {score: 'C+'},
+    {score: 'D'},
+    {score: 'D+'}
+  ]; 
 	// load data from api
 	svTodos.get().success(function(data){
 		$scope.todos=data;
@@ -24,14 +34,16 @@ app.controller("todoController",['$scope','svTodos',function($scope,svTodos){
 			$scope.loading=false;
 		}
 	}
-	$scope.submit = function(){
+	$scope.create = function(){
 		var todo ={
 			text:$scope.formdata.text,
-			isDone:false
+			isDone:false,
+			score:$scope.formdata.score
 		}
 		svTodos.create(todo).success(function(data){
 			$scope.todos = data;
 			$scope.formdata.text ='';
+			$scope.formdata.score='';
 		});
 	}
 
